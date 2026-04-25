@@ -475,6 +475,11 @@
         });
         gsap.from('.hero-content', { opacity: 0, y: 22, duration: .9, ease: 'expo.out' });
         gsap.from('.hero-trust',   { opacity: 0, y: 14, duration: .7, delay: .22, ease: 'expo.out' });
+        /* Unterstrich-Animation erst nach Preloader starten */
+        setTimeout(function () {
+          var hl = document.querySelector('.hero-hl');
+          if (hl) hl.classList.add('animate');
+        }, 400);
       }
     });
   });
