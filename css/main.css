@@ -459,11 +459,29 @@ p  { font-weight: 300; color: var(--ink2); }
    ============================================= */
 .section-benefits {
   position: relative;
-  background:
-    radial-gradient(ellipse at top right, rgba(204,31,31,0.07), transparent 55%),
-    radial-gradient(ellipse at bottom left, rgba(204,31,31,0.05), transparent 55%),
-    var(--surface);
+  background: var(--surface);
   overflow: hidden;
+  isolation: isolate;
+}
+/* Farbige Blobs hinter den Karten — sorgen dafür, dass der Glas-Effekt überhaupt sichtbar wird */
+.section-benefits::before,
+.section-benefits::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+.section-benefits::before {
+  width: 480px; height: 480px;
+  top: -120px; left: -100px;
+  background: radial-gradient(circle, rgba(204,31,31,0.45), rgba(204,31,31,0) 70%);
+}
+.section-benefits::after {
+  width: 520px; height: 520px;
+  bottom: -160px; right: -120px;
+  background: radial-gradient(circle, rgba(255,140,90,0.38), rgba(255,140,90,0) 70%);
 }
 .benefits-grid {
   display: grid;
@@ -475,23 +493,26 @@ p  { font-weight: 300; color: var(--ink2); }
 }
 .benefit-glass {
   position: relative;
-  background: linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 100%);
-  background-color: rgba(204, 31, 31, 0.04);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(204, 31, 31, 0.18);
+  background: linear-gradient(135deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.18) 100%);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.55);
   border-radius: var(--r8);
   padding: 44px 40px;
   box-shadow:
-    0 10px 40px rgba(204, 31, 31, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    0 18px 50px rgba(204, 31, 31, 0.14),
+    0 2px 8px rgba(0,0,0,0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 rgba(204, 31, 31, 0.08);
   transition: transform .35s ease, box-shadow .35s ease;
 }
 .benefit-glass:hover {
   transform: translateY(-4px);
   box-shadow:
-    0 16px 50px rgba(204, 31, 31, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    0 24px 60px rgba(204, 31, 31, 0.20),
+    0 2px 8px rgba(0,0,0,0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(204, 31, 31, 0.10);
 }
 .benefit-glass-icon {
   width: 58px; height: 58px;
@@ -799,9 +820,16 @@ p  { font-weight: 300; color: var(--ink2); }
 
 @media(max-width:800px){
   .about-split { grid-template-columns: 1fr; gap: 40px; }
-  .about-vals { grid-template-columns: 1fr 1fr 1fr; }
+  .about-vals { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .av-item { padding: 18px 8px; aspect-ratio: 1 / 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .av-item h4 { font-size: 12px; }
+  .av-icon svg { width: 22px; height: 22px; }
+  /* Salah-Badge mobil kompakter & in die Karte gerückt */
+  .about-badge { bottom: 16px; left: 16px; padding: 10px 14px; }
+  .about-badge .ab-num { font-size: 22px; }
+  .about-badge .ab-txt { font-size: 10px; }
+  .about-img img { object-fit: cover !important; aspect-ratio: 4 / 5; }
 }
-@media(max-width:500px){ .about-vals { grid-template-columns: 1fr; } }
 
 /* =============================================
    KONTAKT FORMULAR
