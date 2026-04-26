@@ -45,7 +45,8 @@ a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
 /* === TYPOGRAPHY === */
-h1,h2,h3,h4 { font-family: var(--font-d); line-height: 1.1; letter-spacing: .03em; }
+h1,h2,h3,h4 { font-family: var(--font-d); line-height: 1.1; letter-spacing: .03em; text-wrap: balance; }
+p { overflow-wrap: break-word; word-wrap: break-word; }
 h1 { font-size: clamp(38px, 5.5vw, 72px); }
 h2 { font-size: clamp(28px, 3.5vw, 48px); }
 h3 { font-size: clamp(18px, 2vw, 24px); }
@@ -311,7 +312,7 @@ p  { font-weight: 300; color: var(--ink2); }
   transform: scaleX(0);
 }
 .hero-hl.animate::after {
-  animation: hlUnderline 0.65s cubic-bezier(.22,1,.36,1) forwards;
+  animation: hlUnderline 1.4s cubic-bezier(.65,.05,.36,1) forwards;
 }
 @keyframes hlUnderline {
   to { transform: scaleX(1); }
@@ -396,7 +397,7 @@ p  { font-weight: 300; color: var(--ink2); }
    ============================================= */
 .svc-grid {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(2,1fr);
   gap: 24px;
 }
 .svc-card {
@@ -451,8 +452,71 @@ p  { font-weight: 300; color: var(--ink2); }
   white-space: nowrap;
 }
 
-@media(max-width:900px){ .svc-grid { grid-template-columns: 1fr 1fr; } }
 @media(max-width:600px){ .svc-grid { grid-template-columns: 1fr; } }
+
+/* =============================================
+   BENEFITS — GLASSMORPHISM CARDS
+   ============================================= */
+.section-benefits {
+  position: relative;
+  background:
+    radial-gradient(ellipse at top right, rgba(204,31,31,0.07), transparent 55%),
+    radial-gradient(ellipse at bottom left, rgba(204,31,31,0.05), transparent 55%),
+    var(--surface);
+  overflow: hidden;
+}
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 40px;
+  position: relative;
+  z-index: 2;
+}
+.benefit-glass {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 100%);
+  background-color: rgba(204, 31, 31, 0.04);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(204, 31, 31, 0.18);
+  border-radius: var(--r8);
+  padding: 44px 40px;
+  box-shadow:
+    0 10px 40px rgba(204, 31, 31, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.benefit-glass:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 16px 50px rgba(204, 31, 31, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+.benefit-glass-icon {
+  width: 58px; height: 58px;
+  border-radius: 14px;
+  background: rgba(204, 31, 31, 0.1);
+  border: 1px solid rgba(204, 31, 31, 0.22);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--red);
+  margin-bottom: 22px;
+}
+.benefit-glass h3 {
+  font-size: clamp(20px, 2.2vw, 26px);
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.benefit-glass p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink2);
+  font-weight: 300;
+}
+@media(max-width:700px){
+  .benefits-grid { grid-template-columns: 1fr; gap: 20px; }
+  .benefit-glass { padding: 36px 28px; }
+}
 
 /* =============================================
    PROCESS — Vertikale Timeline
@@ -626,8 +690,8 @@ p  { font-weight: 300; color: var(--ink2); }
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 60px; align-items: center; margin-bottom: 80px;
 }
-.lsv-detail:nth-child(even) .lsv-text { order: 2; }
-.lsv-detail:nth-child(even) .lsv-img  { order: 1; }
+.lsv-detail:nth-child(odd) .lsv-text { order: 1; }
+.lsv-detail:nth-child(odd) .lsv-img  { order: 2; }
 .lsv-img {
   border-radius: var(--r8); overflow: hidden;
   aspect-ratio: 4/3; box-shadow: var(--shadow-lg);
@@ -648,8 +712,8 @@ p  { font-weight: 300; color: var(--ink2); }
 
 @media(max-width:800px){
   .lsv-detail { grid-template-columns: 1fr; gap: 32px; }
-  .lsv-detail:nth-child(even) .lsv-text { order: 1; }
-  .lsv-detail:nth-child(even) .lsv-img  { order: 2; }
+  .lsv-detail:nth-child(odd) .lsv-text { order: 2; }
+  .lsv-detail:nth-child(odd) .lsv-img  { order: 1; }
 }
 
 /* Vorteile grid */
