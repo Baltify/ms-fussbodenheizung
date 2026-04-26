@@ -353,7 +353,8 @@ p  { font-weight: 300; color: var(--ink2); }
   .trust-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); padding: 13px 24px; }
   .trust-item:last-child { border-bottom: none; }
   /* extra bottom padding so hero content isn't hidden behind the trust strip */
-  #hero { padding-bottom: 210px; }
+  #hero { padding-bottom: 320px; }
+  .hero-content { padding-top: 60px; }
 }
 
 /* =============================================
@@ -828,6 +829,7 @@ p  { font-weight: 300; color: var(--ink2); }
   .about-badge { bottom: 16px; left: 16px; padding: 10px 14px; }
   .about-badge .ab-num { font-size: 22px; }
   .about-badge .ab-txt { font-size: 10px; }
+  .about-img { max-width: 320px; margin: 0 auto; }
   .about-img img { object-fit: cover !important; aspect-ratio: 4 / 5; }
 }
 
