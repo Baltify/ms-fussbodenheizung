@@ -554,6 +554,7 @@
     funnelData.flaeche   = document.getElementById('f-flaeche').value;
     funnelData.raeume    = document.getElementById('f-raeume').value;
     funnelData.stockwerk = document.getElementById('f-stockwerk').value;
+    funnelData.nachricht = document.getElementById('f-nachricht').value.trim();
 
     /* send via Web3Forms */
     var btn = e.target.querySelector('button[type="submit"]');
@@ -572,7 +573,8 @@
       'Bodenart'        : funnelData.bodenart.join(', '),
       'Fläche'          : funnelData.flaeche + ' m²',
       'Anzahl Räume'    : funnelData.raeume,
-      'Stockwerk'       : funnelData.stockwerk
+      'Stockwerk'       : funnelData.stockwerk,
+      'Hinweise'        : funnelData.nachricht || '–'
     };
 
     fetch('https://api.web3forms.com/submit', {
