@@ -561,18 +561,18 @@
     btn.textContent = 'Wird gesendet …';
 
     var payload = {
-      access_key : '1c0fc614-77d8-49d1-b690-579847c622f9',
-      subject    : 'Neue Anfrage – MS Fußbodenheizung',
-      from_name  : 'Website Kontaktformular',
-      name       : vorname + ' ' + nachname,
-      email      : email,
-      phone      : telefon,
-      bundesland : funnelData.bundesland,
-      gebaeude   : funnelData.gebaeude,
-      bodenart   : funnelData.bodenart.join(', '),
-      flaeche    : funnelData.flaeche + ' m²',
-      raeume     : funnelData.raeume,
-      stockwerk  : funnelData.stockwerk
+      access_key        : '1c0fc614-77d8-49d1-b690-579847c622f9',
+      subject           : 'Neue Anfrage – MS Fußbodenheizung',
+      from_name         : 'Website Kontaktformular',
+      'Name'            : vorname + ' ' + nachname,
+      'E-Mail'          : email,
+      'Telefon'         : telefon,
+      'Bundesland'      : funnelData.bundesland,
+      'Gebäudetyp'      : funnelData.gebaeude,
+      'Bodenart'        : funnelData.bodenart.join(', '),
+      'Fläche'          : funnelData.flaeche + ' m²',
+      'Anzahl Räume'    : funnelData.raeume,
+      'Stockwerk'       : funnelData.stockwerk
     };
 
     fetch('https://api.web3forms.com/submit', {
