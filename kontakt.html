@@ -582,7 +582,7 @@
     })
     .then(function (res) { return res.json(); })
     .then(function (data) {
-      if (data.success) {
+      if (data.success === true) {
         document.querySelector('.funnel-progress-bar-wrap').style.display = 'none';
         document.querySelector('.funnel-step-indicator').style.display    = 'none';
         document.querySelectorAll('.funnel-step').forEach(function (el) {
@@ -592,13 +592,13 @@
       } else {
         btn.disabled    = false;
         btn.textContent = 'Anfrage senden →';
-        alert('Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder ruf uns an.');
+        alert('Fehler: ' + (data.message || 'Unbekannter Fehler') + '\n\nBitte ruf uns direkt an: +49 162 9231576');
       }
     })
-    .catch(function () {
+    .catch(function (err) {
       btn.disabled    = false;
       btn.textContent = 'Anfrage senden →';
-      alert('Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder ruf uns an.');
+      alert('Netzwerkfehler: ' + err.message + '\n\nBitte ruf uns direkt an: +49 162 9231576');
     });
   });
 
