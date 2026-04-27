@@ -555,13 +555,51 @@
     funnelData.raeume    = document.getElementById('f-raeume').value;
     funnelData.stockwerk = document.getElementById('f-stockwerk').value;
 
-    /* show thank-you screen */
-    document.querySelector('.funnel-progress-bar-wrap').style.display = 'none';
-    document.querySelector('.funnel-step-indicator').style.display    = 'none';
-    document.querySelectorAll('.funnel-step').forEach(function (el) {
-      el.classList.remove('active');
+    /* send via Web3Forms */
+    var btn = e.target.querySelector('button[type="submit"]');
+    btn.disabled    = true;
+    btn.textContent = 'Wird gesendet …';
+
+    var payload = {
+      access_key : '1c0fc614-77d8-49d1-b690-579847c622f9',
+      subject    : 'Neue Anfrage – MS Fußbodenheizung',
+      from_name  : 'Website Kontaktformular',
+      name       : vorname + ' ' + nachname,
+      email      : email,
+      phone      : telefon,
+      bundesland : funnelData.bundesland,
+      gebaeude   : funnelData.gebaeude,
+      bodenart   : funnelData.bodenart.join(', '),
+      flaeche    : funnelData.flaeche + ' m²',
+      raeume     : funnelData.raeume,
+      stockwerk  : funnelData.stockwerk
+    };
+
+    fetch('https://api.web3forms.com/submit', {
+      method  : 'POST',
+      headers : { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body    : JSON.stringify(payload)
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (data.success) {
+        document.querySelector('.funnel-progress-bar-wrap').style.display = 'none';
+        document.querySelector('.funnel-step-indicator').style.display    = 'none';
+        document.querySelectorAll('.funnel-step').forEach(function (el) {
+          el.classList.remove('active');
+        });
+        document.getElementById('funnelThanks').style.display = 'block';
+      } else {
+        btn.disabled    = false;
+        btn.textContent = 'Anfrage senden →';
+        alert('Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder ruf uns an.');
+      }
+    })
+    .catch(function () {
+      btn.disabled    = false;
+      btn.textContent = 'Anfrage senden →';
+      alert('Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder ruf uns an.');
     });
-    document.getElementById('funnelThanks').style.display = 'block';
   });
 
   /* clear red border on input focus */
