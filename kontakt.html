@@ -262,17 +262,17 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="f-vorname">Vorname <span style="color:var(--red)">*</span></label>
-                <input type="text" id="f-vorname" placeholder="Max" required autocomplete="given-name"/>
+                <input type="text" id="f-vorname" placeholder="Max" required autocomplete="given-name" minlength="2" pattern="[A-Za-zÄäÖöÜüßÀ-ÿ\s\-]+" title="Nur Buchstaben und Bindestriche erlaubt"/>
               </div>
               <div class="form-group">
                 <label for="f-nachname">Nachname <span style="color:var(--red)">*</span></label>
-                <input type="text" id="f-nachname" placeholder="Mustermann" required autocomplete="family-name"/>
+                <input type="text" id="f-nachname" placeholder="Mustermann" required autocomplete="family-name" minlength="2" pattern="[A-Za-zÄäÖöÜüßÀ-ÿ\s\-]+" title="Nur Buchstaben und Bindestriche erlaubt"/>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="f-telefon">Telefon <span style="color:var(--red)">*</span></label>
-                <input type="tel" id="f-telefon" placeholder="+49 ..." required autocomplete="tel"/>
+                <input type="tel" id="f-telefon" placeholder="+49 ..." required autocomplete="tel" pattern="[\d\s\+\-\(\)]{6,20}" title="Gültige Telefonnummer eingeben (z. B. +49 162 1234567)"/>
               </div>
               <div class="form-group">
                 <label for="f-email">E-Mail <span style="color:var(--red)">*</span></label>
@@ -540,15 +540,24 @@
     var datenschutz = document.getElementById('f-datenschutz').checked;
 
     /* validate */
-    markInvalid('f-vorname',  vorname);
-    markInvalid('f-nachname', nachname);
-    markInvalid('f-telefon',  telefon);
-    markInvalid('f-email',    email);
+    var namePattern  = /^[A-Za-zÄäÖöÜüßÀ-ÿ\s\-]{2,}$/;
+    var telPattern   = /^[\d\s\+\-\(\)]{6,20}$/;
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    var vornameOk  = namePattern.test(vorname);
+    var nachnameOk = namePattern.test(nachname);
+    var telefonOk  = telPattern.test(telefon);
+    var emailOk    = emailPattern.test(email);
+
+    markInvalid('f-vorname',  vornameOk);
+    markInvalid('f-nachname', nachnameOk);
+    markInvalid('f-telefon',  telefonOk);
+    markInvalid('f-email',    emailOk);
 
     var dsWrap = document.getElementById('f-datenschutz').closest('.form-group');
     if (dsWrap) dsWrap.style.outline = datenschutz ? '' : '2px solid var(--red)';
 
-    if (!vorname || !nachname || !telefon || !email || !datenschutz) return;
+    if (!vornameOk || !nachnameOk || !telefonOk || !emailOk || !datenschutz) return;
 
     /* collect remaining data */
     funnelData.flaeche   = document.getElementById('f-flaeche').value;
