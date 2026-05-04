@@ -262,6 +262,9 @@ p  { font-weight: 300; color: var(--ink2); }
   text-decoration: none; transition: color .2s;
 }
 .cta-split-phone:hover { color: var(--red); }
+.cta-phone-avatar {
+  display: none; /* nur Mobile sichtbar */
+}
 .cta-split-img {
   border-radius: var(--r8); overflow: hidden;
   box-shadow: var(--shadow-lg);
@@ -270,7 +273,24 @@ p  { font-weight: 300; color: var(--ink2); }
 .cta-split-img img { width: 100%; height: 100%; object-fit: cover; }
 @media (max-width: 900px) {
   .cta-split-inner { grid-template-columns: 1fr; gap: 40px; }
-  .cta-split-img { aspect-ratio: 16/9; max-height: 360px; }
+  .cta-split-img { display: none; } /* großes Portrait auf Mobile ausblenden */
+  .cta-split-btns { flex-direction: column; align-items: stretch; gap: 12px; }
+  .cta-split-btns .btn-primary { text-align: center; }
+  .cta-split-phone {
+    background: var(--surface);
+    border-radius: var(--r4);
+    padding: 13px 18px;
+    gap: 12px;
+  }
+  .cta-phone-avatar {
+    display: block;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    flex-shrink: 0;
+    border: 2px solid rgba(204,31,31,0.2);
+  }
 }
 
 /* Pipe animation overlay */
