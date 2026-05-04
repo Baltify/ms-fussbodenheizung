@@ -544,10 +544,16 @@ p  { font-weight: 300; color: var(--ink2); }
   color: var(--ink2);
   font-weight: 300;
 }
-/* Center last partial row (e.g. 5 cards → row 2 has 2 → push to cols 2+3) */
+/* Flex-Ansatz: justify-content:center zentriert letzte unvollständige Reihe automatisch */
 @media (min-width: 901px) {
-  .benefit-glass:nth-child(3n+1):nth-last-child(-n+2) {
-    grid-column-start: 2;
+  .benefits-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+  }
+  .benefit-glass {
+    flex: 0 1 calc(33.333% - 19px);
   }
 }
 @media(max-width:900px){
