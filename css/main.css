@@ -563,6 +563,12 @@ p  { font-weight: 300; color: var(--ink2); }
   color: var(--ink2);
   font-weight: 300;
 }
+/* Center last partial row (e.g. 5 cards → row 2 has 2 → push to cols 2+3) */
+@media (min-width: 901px) {
+  .benefit-glass:nth-child(3n+1):nth-last-child(-n+2) {
+    grid-column-start: 2;
+  }
+}
 @media(max-width:900px){
   .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
 }
