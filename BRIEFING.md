@@ -1,5 +1,5 @@
 # BRIEFING — MS Fußbodenheizung Website
-> Baltify-Projekt | Stand: 2026-05-04 | Level 1 | SEO ≥ 90 % Pflicht
+> Baltify-Projekt | Stand: 2026-05-04 | Level 1 | SEO ≥ 90 % Pflicht | Letzter Commit: `2a9ef13`
 
 ---
 
@@ -78,7 +78,7 @@ Ziel: professioneller Webauftritt für nachträgliches Fußbodenheizungs-Einfrä
 3. **Was wir machen** — 2-Spalten Split-Layout (links: sticky Text/Headline/CTA, rechts: saubere Liste mit Trennlinien + Icon pro Leistung) — KEIN Boxen-Design mehr
 4. **Vorteile** — 5 Glassmorphismus-Cards (Flex, justify-center), Liquid-Glass Rot-Tint, kein roter Blob-BG
 5. **Ablauf** — Vertikale Timeline (01–04), GSAP scroll-animiert
-6. **CTA Split** — Text + Checkliste links, Portrait (portrait.jpg) rechts — zwischen Ablauf und Galerie
+6. **CTA Split** — Text + Checkliste links, Portrait (portrait.jpg) rechts — zwischen Ablauf und Galerie. **Mobile:** großes Portrait ausgeblendet, stattdessen kleines rundes Portrait (42px, border-radius:50%) links neben der Telefonnummer-Zeile; Button + Telefonzeile stacken vertikal, beide gleich breit
 7. **Galerie** — 6 Referenz-Fotos, 3-spaltig
 8. **Stats** — 20.000+ m², 60+ Projekte, 1–2 Tage
 9. **Bewertungen** — Karussell, 9 Google-Reviews, Dots, Touch-Swipe
@@ -132,7 +132,7 @@ Gilt für: Nav (Desktop + Mobile), Hero, CTA Split, alle Seiten (index, leistung
 - **Prozess-Headline:** „Von der Anfrage zum warmen Boden"
 - **Prozess-Schritt 02:** „Wir kommen persönlich zu Ihnen" (nicht „Salah kommt...")
 - **Hero-Bild:** `hero-ref01.jpg` (Referenzbild, kein Stockfoto)
-- **Portrait:** `portrait.jpg` — Salah im CTA-Split
+- **Portrait:** `portrait.jpg` — Salah im CTA-Split (Desktop: große Spalte rechts, Mobile: kleines Rundbild 42px neben Telefonnummer, `.cta-phone-avatar`)
 - **CTA Split Platzierung:** zwischen Ablauf und Galerie (logische Erzählung: Prozess → persönlicher Kontakt → Referenzfotos)
 - **Roter CTA-Banner:** entfernt — ersetzt durch 5-Schritt Analyse-Funnel (`#analyse`)
 - **Telefonnummer:** +49 1551 0924122 (auch WhatsApp)
@@ -168,7 +168,7 @@ GA + Microsoft Clarity IDs auskommentiert — **noch nicht aktiviert** (Kunde ha
 | 4 | ueber-uns.html Inhalt prüfen/vervollständigen | Mittel |
 | 5 | Lighthouse / PageSpeed Score testen (≥ 90 Ziel) | Hoch |
 | 6 | Weitere Referenzfotos vom Kunden anfordern | Niedrig |
-| 7 | Mobile CTA Split prüfen (Portrait ggf. auf Mobile ausblenden) | Niedrig |
+| 7 | ~~Mobile CTA Split~~ | ✅ Erledigt |
 
 ---
 
@@ -183,8 +183,10 @@ git push
 ```
 
 Letzte Commits (neueste oben):
-- `4242753` — fix: center benefit cards row + wir kommen persönlich
-- `92830a1` — preloader entfernt, 5 benefit cards, CTA split, prozess überarbeitet
+- `2a9ef13` — fix: mobile CTA split — kleines rundes Portrait neben Telefonnummer
+- `6f01fb5` — feat: service section redesign (split layout) + reviews dots fix
+- `25b39c8` — fix: CTA-Split zwischen Ablauf und Galerie verschoben
+- `4242753` — fix: benefit cards zentriert + wir kommen persönlich
 - ältere: Web3Forms, Favicon, Reviews, Cookie-Banner, SEO
 
 ---
