@@ -85,13 +85,18 @@
     dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
   }
 
-  /* ── Dots ── */
+  /* ── Dots (dynamic — rebuilt on resize so count = maxIndex+1) ── */
   var dots = [];
-  if (dotsEl) {
-    for (var i = 0; i < total; i++) {
+
+  function buildDots() {
+    if (!dotsEl) return;
+    dotsEl.innerHTML = '';
+    dots = [];
+    var pages = maxIndex() + 1;
+    for (var i = 0; i < pages; i++) {
       (function (idx) {
         var d = document.createElement('button');
-        d.className = 'rev-dot' + (idx === 0 ? ' active' : '');
+        d.className = 'rev-dot' + (idx === current ? ' active' : '');
         d.setAttribute('aria-label', 'Bewertung ' + (idx + 1));
         d.addEventListener('click', function () { go(idx); clearAuto(); });
         dotsEl.appendChild(d);
@@ -99,6 +104,8 @@
       })(i);
     }
   }
+
+  buildDots();
 
   if (btnPrev) btnPrev.addEventListener('click', function () { go(current - 1); clearAuto(); });
   if (btnNext) btnNext.addEventListener('click', function () { go(current + 1); clearAuto(); });
@@ -125,6 +132,6 @@
     if (Math.abs(diff) > 40) go(diff > 0 ? current + 1 : current - 1);
   });
 
-  window.addEventListener('resize', function () { go(current); });
+  window.addEventListener('resize', function () { buildDots(); go(current); });
   go(0);
 })();

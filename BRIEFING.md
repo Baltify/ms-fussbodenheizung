@@ -56,12 +56,17 @@ Ziel: professioneller Webauftritt für nachträgliches Fußbodenheizungs-Einfrä
 ```css
 --red:        #CC1F1F      /* Primärfarbe */
 --red-dark:   #A81818
+--red-alpha:  rgba(204,31,31,.12)
 --ink:        #1A1A1A      /* Haupttext */
 --ink2:       #3D3A33
+--muted:      #9A9590
+--border:     rgba(20,18,14,.1)
 --page:       #F5F3EF      /* Seitenhintergrund */
 --surface:    #EDEAE4      /* Alt-Sektionen */
+--surface2:   #E6E2DA
 --font-d:     'Anton'      /* Display/Headlines */
 --font-b:     'DM Sans'    /* Body */
+--r2: 8px  --r4: 12px  --r8: 18px
 ```
 
 ---
@@ -70,14 +75,14 @@ Ziel: professioneller Webauftritt für nachträgliches Fußbodenheizungs-Einfrä
 
 1. **Navigation** — fixed, scrolled-Klasse bei Scroll, Hamburger Mobile
 2. **Hero** — Vollbild, `hero-ref01.jpg`, Trust-Strip unten
-3. **Was wir machen** — 4 Service-Cards (Fräsen, Rohrverlegung, Verspachteln, Naturstein)
-4. **Vorteile** — 5 Glasmorphismus-Cards (3-spaltig), Liquid-Glass Rot-Tint, kein roter Blob-BG
+3. **Was wir machen** — 2-Spalten Split-Layout (links: sticky Text/Headline/CTA, rechts: saubere Liste mit Trennlinien + Icon pro Leistung) — KEIN Boxen-Design mehr
+4. **Vorteile** — 5 Glassmorphismus-Cards (Flex, justify-center), Liquid-Glass Rot-Tint, kein roter Blob-BG
 5. **Ablauf** — Vertikale Timeline (01–04), GSAP scroll-animiert
-6. **Galerie** — 6 Referenz-Fotos, 3-spaltig
-7. **Stats** — 20.000+ m², 60+ Projekte, 1–2 Tage
-8. **Bewertungen** — Karussell, 9 Google-Reviews, Dots, Touch-Swipe
-9. **CTA Split** — Text + Checkliste links, Portrait rechts (2-spaltig Grid)
-10. **CTA Banner** — Roter Hintergrund, Abschluss-Call-to-Action
+6. **CTA Split** — Text + Checkliste links, Portrait (portrait.jpg) rechts — zwischen Ablauf und Galerie
+7. **Galerie** — 6 Referenz-Fotos, 3-spaltig
+8. **Stats** — 20.000+ m², 60+ Projekte, 1–2 Tage
+9. **Bewertungen** — Karussell, 9 Google-Reviews, Dots, Touch-Swipe
+10. **Analyse-Funnel** (`#analyse`) — 5-Schritt-Formular (Name/Tel → Bundesland → Gebäude/Boden → Fläche → Heizung) — ersetzt alten roten CTA-Banner
 11. **Footer** — Logo, Nav, Kontakt, Legal, baltify-Credit
 
 ---
@@ -89,10 +94,18 @@ Ziel: professioneller Webauftritt für nachträgliches Fußbodenheizungs-Einfrä
 - **Felder:** Name, Telefon, E-Mail, Bundesland, Gebäudetyp, Bodenart, Fläche, Heizung vorhanden, Zusatz-Infos/Hinweise
 - **Validierung:** Regex für Name (nur Buchstaben), Telefon (nur Ziffern/+/-/ ), E-Mail (Format)
 - **Trust-Bar** über Footer: Google-Rating, 2 Kunden-Zitate
+- Gleicher Funnel auch direkt auf index.html als `#analyse`-Sektion eingebettet
 
 ---
 
-## 7. SEO-Setup
+## 7. CTAs — überall vereinheitlicht
+
+**Button-Text überall:** `Kostenlose Analyse anfragen`  
+Gilt für: Nav (Desktop + Mobile), Hero, CTA Split, alle Seiten (index, leistungen, kontakt, ueber-uns).
+
+---
+
+## 8. SEO-Setup
 
 | Was | Status |
 |---|---|
@@ -109,38 +122,43 @@ Ziel: professioneller Webauftritt für nachträgliches Fußbodenheizungs-Einfrä
 
 ---
 
-## 8. Wichtige Inhalts-Entscheidungen
+## 9. Wichtige Inhalts-Entscheidungen
 
 - **Preloader:** entfernt — Hero animiert direkt via GSAP
 - **Benefit-Karten:** 5 Stück (Keine Aufbauhöhe, Günstiger heizen, Immobilie aufwerten, Leise & staubarm, Festpreis-Garantie)
-- **Benefit-BG:** kein roter Blob-Hintergrund — stattdessen Liquid-Glass Rot-Tint direkt auf Karte
+- **Benefit-BG:** kein roter Blob-Hintergrund — Liquid-Glass Rot-Tint direkt auf Karte (backdrop-filter)
+- **Benefit-Layout:** Flexbox mit `justify-content: center` → 5. Karte zentriert in letzter Reihe
+- **"Was wir machen" Layout:** 2-Spalten Split (kein Box-/Card-Design mehr), links sticky, rechts Liste mit border-top/bottom Trennlinien
 - **Prozess-Headline:** „Von der Anfrage zum warmen Boden"
 - **Prozess-Schritt 02:** „Wir kommen persönlich zu Ihnen" (nicht „Salah kommt...")
 - **Hero-Bild:** `hero-ref01.jpg` (Referenzbild, kein Stockfoto)
 - **Portrait:** `portrait.jpg` — Salah im CTA-Split
-- **Sektionen „Was wir machen" vs. „Ablauf":** beide bleiben — verschiedene Inhalte (Leistungen vs. Prozess)
+- **CTA Split Platzierung:** zwischen Ablauf und Galerie (logische Erzählung: Prozess → persönlicher Kontakt → Referenzfotos)
+- **Roter CTA-Banner:** entfernt — ersetzt durch 5-Schritt Analyse-Funnel (`#analyse`)
 - **Telefonnummer:** +49 1551 0924122 (auch WhatsApp)
 - **Leistungen-Headline:** „Unser Ablauf — Schritt für Schritt"
 - **Leistungen Intro-Absatz:** beginnt mit „Komplett aus einer Hand" (Option A)
 
 ---
 
-## 9. Bewertungs-Karussell (`js/reviews.js`)
+## 10. Bewertungs-Karussell (`js/reviews.js`)
 
 9 Reviews (Inhaber ausgelassen), hardcoded. Alle 5-Sterne Google-Bewertungen.  
 Auto-Play 4,5 s, pausiert bei Hover, Touch-Swipe, Dots, Prev/Next-Buttons.  
 3 Karten Desktop / 2 Tablet / 1 Mobile.
 
+**Dots-Fix:** `buildDots()` erstellt dynamisch `maxIndex() + 1` Dots (nicht fix 9), wird auch bei `window.resize` neu aufgebaut → Dots sind immer synchron mit tatsächlichen Carousel-Positionen.
+
 ---
 
-## 10. Cookie-Banner (`js/cookie-banner.js`)
+## 11. Cookie-Banner (`js/cookie-banner.js`)
 
 DSGVO-konform, LocalStorage-Persistenz.  
 GA + Microsoft Clarity IDs auskommentiert — **noch nicht aktiviert** (Kunde hat keine IDs geliefert).
 
 ---
 
-## 11. Offene Punkte / To-Do
+## 12. Offene Punkte / To-Do
 
 | # | Was | Prio |
 |---|---|---|
@@ -150,10 +168,11 @@ GA + Microsoft Clarity IDs auskommentiert — **noch nicht aktiviert** (Kunde ha
 | 4 | ueber-uns.html Inhalt prüfen/vervollständigen | Mittel |
 | 5 | Lighthouse / PageSpeed Score testen (≥ 90 Ziel) | Hoch |
 | 6 | Weitere Referenzfotos vom Kunden anfordern | Niedrig |
+| 7 | Mobile CTA Split prüfen (Portrait ggf. auf Mobile ausblenden) | Niedrig |
 
 ---
 
-## 12. Git-Workflow
+## 13. Git-Workflow
 
 ```bash
 cd "/Users/baltifymarketing/Documents/Kunden /MS-Fussbodenheizung/Website"
@@ -170,7 +189,7 @@ Letzte Commits (neueste oben):
 
 ---
 
-## 13. Dateistruktur
+## 14. Dateistruktur
 
 ```
 Website/
@@ -185,7 +204,7 @@ Website/
 │   └── main.css         ← einzige CSS-Datei, alles drin
 ├── js/
 │   ├── main.js          ← Nav, GSAP, FAQ, Counter, Timeline
-│   ├── reviews.js       ← Bewertungs-Karussell
+│   ├── reviews.js       ← Bewertungs-Karussell (Dots dynamisch)
 │   └── cookie-banner.js ← DSGVO Cookie-Banner
 └── img/
     ├── hero.jpg / hero-ref01.jpg / hero-ref02.jpg
