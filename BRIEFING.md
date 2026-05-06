@@ -1,5 +1,5 @@
 # BRIEFING — MS Fußbodenheizung Website
-> Baltify-Projekt | Stand: 2026-05-04 | Level 1 | SEO ≥ 90 % Pflicht | Letzter Commit: `2a9ef13`
+> Baltify-Projekt | Stand: 2026-05-06 | Level 1 | SEO ≥ 90 % Pflicht | Letzter Commit: `354ce23`
 
 ---
 
@@ -46,7 +46,7 @@ Ziel: professioneller Webauftritt für nachträgliches Fußbodenheizungs-Einfrä
 | Kontaktformular | Web3Forms (API-Key: `1c0fc614-77d8-49d1-b690-579847c622f9`) |
 | Bewertungen-Karussell | `js/reviews.js` — Vanilla JS, 9 Reviews, Auto-Play 4,5 s |
 | Cookie-Banner | `js/cookie-banner.js` — DSGVO, LocalStorage |
-| Haupt-Skript | `js/main.js` — Nav, GSAP-Reveal, FAQ, Zähler, Prozess-Timeline |
+| Haupt-Skript | `js/main.js` — Nav, GSAP-Reveal, FAQ, Zähler, Prozess-Timeline, Galerie-Toggle |
 | Favicon | PNG 16/32/512 + Apple Touch + ICO — generiert mit Python/PIL |
 
 ---
@@ -74,12 +74,12 @@ Ziel: professioneller Webauftritt für nachträgliches Fußbodenheizungs-Einfrä
 ## 5. Sektionen — index.html (Reihenfolge)
 
 1. **Navigation** — fixed, scrolled-Klasse bei Scroll, Hamburger Mobile
-2. **Hero** — Vollbild, `hero-ref01.jpg`, Trust-Strip unten
+2. **Hero** — Vollbild, `leistung-fraesen.jpg` (echtes Arbeitsbild)
 3. **Was wir machen** — 2-Spalten Split-Layout (links: sticky Text/Headline/CTA, rechts: saubere Liste mit Trennlinien + Icon pro Leistung) — KEIN Boxen-Design mehr
 4. **Vorteile** — 5 Glassmorphismus-Cards (Flex, justify-center), Liquid-Glass Rot-Tint, kein roter Blob-BG
 5. **Ablauf** — Vertikale Timeline (01–04), GSAP scroll-animiert
 6. **CTA Split** — Text + Checkliste links, Portrait (portrait.jpg) rechts — zwischen Ablauf und Galerie. **Mobile:** großes Portrait ausgeblendet, stattdessen kleines rundes Portrait (42px, border-radius:50%) links neben der Telefonnummer-Zeile; Button + Telefonzeile stacken vertikal, beide gleich breit
-7. **Galerie** — 6 Referenz-Fotos, 3-spaltig
+7. **Galerie** — 39 Referenzfotos, 3-spaltig. Erste 6 sichtbar, restliche 33 per „Alle 39 Referenzen anzeigen ↓"-Button einblendbar (GSAP-Stagger). Button wechselt zu „Weniger anzeigen ↑" + scrollt zurück zum Grid-Anfang
 8. **Stats** — 20.000+ m², 60+ Projekte, 1–2 Tage
 9. **Bewertungen** — Karussell, 9 Google-Reviews, Dots, Touch-Swipe
 10. **Analyse-Funnel** (`#analyse`) — 5-Schritt-Formular (Name/Tel → Bundesland → Gebäude/Boden → Fläche → Heizung) — ersetzt alten roten CTA-Banner
@@ -131,13 +131,14 @@ Gilt für: Nav (Desktop + Mobile), Hero, CTA Split, alle Seiten (index, leistung
 - **"Was wir machen" Layout:** 2-Spalten Split (kein Box-/Card-Design mehr), links sticky, rechts Liste mit border-top/bottom Trennlinien
 - **Prozess-Headline:** „Von der Anfrage zum warmen Boden"
 - **Prozess-Schritt 02:** „Wir kommen persönlich zu Ihnen" (nicht „Salah kommt...")
-- **Hero-Bild:** `hero-ref01.jpg` (Referenzbild, kein Stockfoto)
+- **Hero-Bild:** `leistung-fraesen.jpg` (echtes Arbeitsbild des Kunden)
 - **Portrait:** `portrait.jpg` — Salah im CTA-Split (Desktop: große Spalte rechts, Mobile: kleines Rundbild 42px neben Telefonnummer, `.cta-phone-avatar`)
 - **CTA Split Platzierung:** zwischen Ablauf und Galerie (logische Erzählung: Prozess → persönlicher Kontakt → Referenzfotos)
 - **Roter CTA-Banner:** entfernt — ersetzt durch 5-Schritt Analyse-Funnel (`#analyse`)
 - **Telefonnummer:** +49 1551 0924122 (auch WhatsApp)
 - **Leistungen-Headline:** „Unser Ablauf — Schritt für Schritt"
 - **Leistungen Intro-Absatz:** beginnt mit „Komplett aus einer Hand" (Option A)
+- **Bilder komplett ausgetauscht** (2026-05-06): alle alten Stockfotos/Placeholder entfernt, 39 echte Kundenfotos eingebunden. Hero = `leistung-fraesen.jpg`
 
 ---
 
@@ -167,8 +168,8 @@ GA + Microsoft Clarity IDs auskommentiert — **noch nicht aktiviert** (Kunde ha
 | 3 | GA/Clarity IDs vom Kunden einholen + in cookie-banner.js eintragen | Mittel |
 | 4 | ueber-uns.html Inhalt prüfen/vervollständigen | Mittel |
 | 5 | Lighthouse / PageSpeed Score testen (≥ 90 Ziel) | Hoch |
-| 6 | Weitere Referenzfotos vom Kunden anfordern | Niedrig |
-| 7 | ~~Mobile CTA Split~~ | ✅ Erledigt |
+| 6 | ~~Mobile CTA Split~~ | ✅ Erledigt |
+| 7 | ~~Referenzfotos vom Kunden~~ | ✅ Erledigt (39 Fotos) |
 
 ---
 
@@ -183,10 +184,10 @@ git push
 ```
 
 Letzte Commits (neueste oben):
+- `354ce23` — feat: alle Bilder ausgetauscht — 39 Referenzfotos, 4 neue Leistungsbilder, Hero auf leistung-fraesen
+- `3b2236c` — docs: briefing aktualisiert — mobile CTA split, service redesign, dots fix
 - `2a9ef13` — fix: mobile CTA split — kleines rundes Portrait neben Telefonnummer
 - `6f01fb5` — feat: service section redesign (split layout) + reviews dots fix
-- `25b39c8` — fix: CTA-Split zwischen Ablauf und Galerie verschoben
-- `4242753` — fix: benefit cards zentriert + wir kommen persönlich
 - ältere: Web3Forms, Favicon, Reviews, Cookie-Banner, SEO
 
 ---
@@ -205,17 +206,19 @@ Website/
 ├── css/
 │   └── main.css         ← einzige CSS-Datei, alles drin
 ├── js/
-│   ├── main.js          ← Nav, GSAP, FAQ, Counter, Timeline
+│   ├── main.js          ← Nav, GSAP, FAQ, Counter, Timeline, Galerie-Toggle
 │   ├── reviews.js       ← Bewertungs-Karussell (Dots dynamisch)
 │   └── cookie-banner.js ← DSGVO Cookie-Banner
 └── img/
-    ├── hero.jpg / hero-ref01.jpg / hero-ref02.jpg
+    ├── leistung-fraesen.jpg        ← Hero + Leistungen Schritt 1
+    ├── leistung-rohrverlegung.jpg  ← Leistungen Schritt 2
+    ├── leistung-anschliessen.jpg   ← Leistungen Schritt 3
+    ├── leistung-verspachteln.jpg   ← Leistungen Schritt 4
+    ├── referenz-01..39.jpg         ← Galerie (39 Kundenfotos)
     ├── portrait.jpg
-    ├── ms-logo.png
+    ├── ms-logo.png / logo-full.jpg
     ├── ueber-uns.jpg
-    ├── referenz-01..06.jpg
-    ├── leistung-*.jpg
-    ├── estrich-*.jpg
+    ├── estrich-zement/anhydrit/asphalt.jpg  ← Funnel-Auswahl
     └── favicon-*.png / favicon.ico / apple-touch-icon.png
 ```
 

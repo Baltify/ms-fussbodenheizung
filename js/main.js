@@ -169,6 +169,32 @@ function initProcessPipe() {
 }
 
 /* === INIT === */
+function initGalleryToggle() {
+  var btn = document.getElementById('galleryToggleBtn');
+  if (!btn) return;
+  var extras = document.querySelectorAll('.gallery-extra');
+  var btnText = btn.querySelector('.gallery-btn-text');
+
+  btn.addEventListener('click', function () {
+    var isOpen = btn.classList.contains('open');
+    if (!isOpen) {
+      extras.forEach(function (el) { el.style.display = 'block'; });
+      if (!noMotion) {
+        gsap.from(extras, { opacity: 0, scale: 0.93, duration: 0.45, stagger: 0.03, ease: 'power2.out' });
+      }
+      btn.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      btnText.textContent = 'Weniger anzeigen';
+    } else {
+      extras.forEach(function (el) { el.style.display = 'none'; });
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      btnText.textContent = 'Alle 39 Referenzen anzeigen';
+      document.querySelector('.gallery-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+}
+
 function initAll() {
   initNav();
   initActiveNav();
@@ -178,6 +204,7 @@ function initAll() {
   initFaq();
   initRadioOptions();
   initContactForm();
+  initGalleryToggle();
   ScrollTrigger.refresh();
 }
 
