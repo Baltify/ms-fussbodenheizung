@@ -40,98 +40,116 @@
     }
   ];
 
-  var track  = document.getElementById('reviewsTrack');
-  var dotsEl = document.getElementById('reviewsDots');
+  var outer   = document.getElementById('reviewsCardOuter');
+  var dotsEl  = document.getElementById('reviewsDots');
   var btnPrev = document.getElementById('revPrev');
   var btnNext = document.getElementById('revNext');
-  if (!track) return;
+  if (!outer) return;
 
-  /* ── Render cards ── */
-  REVIEWS.forEach(function (r) {
+  var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cards    = [];
+  var current  = 0;
+  var animating = false;
+
+  /* ── Build cards ── */
+  REVIEWS.forEach(function (r, i) {
     var card = document.createElement('div');
-    card.className = 'rev-card reveal';
+    card.className = 'rev-card';
     card.innerHTML =
       '<div class="rev-stars">★★★★★</div>' +
-      '<p class="rev-text">„' + r.text + '“</p>' +
+      '<div class="rev-quote">„</div>' +
+      '<p class="rev-text">' + r.text + '"</p>' +
+      '<div class="rev-separator"></div>' +
       '<div class="rev-author">' +
         '<div class="rev-avatar" style="background:' + r.color + '">' + r.initial + '</div>' +
         '<div>' +
           '<div class="rev-name">' + r.name + '</div>' +
-          '<div class="rev-source">Google Bewertung</div>' +
+          '<div class="rev-source">Google Bewertung · ★★★★★</div>' +
         '</div>' +
       '</div>';
-    track.appendChild(card);
+    outer.appendChild(card);
+    cards.push(card);
+    gsap.set(card, { opacity: i === 0 ? 1 : 0, x: 0, visibility: i === 0 ? 'visible' : 'hidden' });
   });
 
-  /* ── Carousel logic ── */
-  function getVisible() {
-    var w = window.innerWidth;
-    if (w <= 600) return 1;
-    if (w <= 900) return 2;
-    return 3;
-  }
-
-  var current = 0;
-  var total   = REVIEWS.length;
-
-  function maxIndex() { return total - getVisible(); }
-
-  function go(n) {
-    current = Math.max(0, Math.min(n, maxIndex()));
-    var cardW = track.children[0].offsetWidth + 20; // width + gap
-    track.style.transform = 'translateX(-' + (current * cardW) + 'px)';
-    if (btnPrev) btnPrev.disabled = current === 0;
-    if (btnNext) btnNext.disabled = current >= maxIndex();
-    dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
-  }
-
-  /* ── Dots (dynamic — rebuilt on resize so count = maxIndex+1) ── */
+  /* ── Dots ── */
   var dots = [];
-
   function buildDots() {
     if (!dotsEl) return;
     dotsEl.innerHTML = '';
     dots = [];
-    var pages = maxIndex() + 1;
-    for (var i = 0; i < pages; i++) {
-      (function (idx) {
-        var d = document.createElement('button');
-        d.className = 'rev-dot' + (idx === current ? ' active' : '');
-        d.setAttribute('aria-label', 'Bewertung ' + (idx + 1));
-        d.addEventListener('click', function () { go(idx); clearAuto(); });
-        dotsEl.appendChild(d);
-        dots.push(d);
-      })(i);
-    }
+    REVIEWS.forEach(function (_, i) {
+      var d = document.createElement('button');
+      d.className = 'rev-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Bewertung ' + (i + 1));
+      d.addEventListener('click', function () { goTo(i); clearAuto(); });
+      dotsEl.appendChild(d);
+      dots.push(d);
+    });
   }
-
   buildDots();
 
-  if (btnPrev) btnPrev.addEventListener('click', function () { go(current - 1); clearAuto(); });
-  if (btnNext) btnNext.addEventListener('click', function () { go(current + 1); clearAuto(); });
+  function updateDots() {
+    dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+  }
+
+  /* ── Transition ── */
+  function goTo(next, dir) {
+    if (animating || next === current) return;
+    animating = true;
+    if (dir === undefined) dir = next > current ? 1 : -1;
+
+    var outCard = cards[current];
+    var inCard  = cards[next];
+
+    gsap.set(inCard, { opacity: 0, x: dir * 70, visibility: 'visible' });
+
+    if (noMotion) {
+      gsap.set(outCard, { opacity: 0, visibility: 'hidden' });
+      gsap.set(inCard,  { opacity: 1, x: 0 });
+      animating = false;
+    } else {
+      var tl = gsap.timeline({ onComplete: function () {
+        gsap.set(outCard, { visibility: 'hidden' });
+        animating = false;
+      }});
+      tl.to(outCard, { opacity: 0, x: dir * -50, duration: 0.28, ease: 'power2.in' }, 0);
+      tl.to(inCard,  { opacity: 1, x: 0,         duration: 0.38, ease: 'power2.out' }, 0.18);
+    }
+
+    current = next;
+    updateDots();
+  }
+
+  /* ── Controls ── */
+  if (btnPrev) btnPrev.addEventListener('click', function () {
+    goTo((current - 1 + REVIEWS.length) % REVIEWS.length, -1);
+    clearAuto();
+  });
+  if (btnNext) btnNext.addEventListener('click', function () {
+    goTo((current + 1) % REVIEWS.length, 1);
+    clearAuto();
+  });
 
   /* ── Auto-play ── */
-  var timer = setInterval(function () {
-    go(current >= maxIndex() ? 0 : current + 1);
-  }, 4500);
-
+  var timer = setInterval(tick, 6000);
+  function tick() { goTo((current + 1) % REVIEWS.length, 1); }
   function clearAuto() { clearInterval(timer); }
 
-  track.parentElement.addEventListener('mouseenter', function () { clearInterval(timer); });
-  track.parentElement.addEventListener('mouseleave', function () {
-    timer = setInterval(function () {
-      go(current >= maxIndex() ? 0 : current + 1);
-    }, 4500);
-  });
+  outer.addEventListener('mouseenter', clearAuto);
+  outer.addEventListener('mouseleave', function () { timer = setInterval(tick, 6000); });
 
   /* ── Touch swipe ── */
   var startX = 0;
-  track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; clearAuto(); }, { passive: true });
-  track.addEventListener('touchend', function (e) {
+  outer.addEventListener('touchstart', function (e) {
+    startX = e.touches[0].clientX; clearAuto();
+  }, { passive: true });
+  outer.addEventListener('touchend', function (e) {
     var diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) go(diff > 0 ? current + 1 : current - 1);
+    if (Math.abs(diff) > 40) {
+      var dir  = diff > 0 ? 1 : -1;
+      var next = (current + dir + REVIEWS.length) % REVIEWS.length;
+      goTo(next, dir);
+    }
   });
-
-  window.addEventListener('resize', function () { buildDots(); go(current); });
-  go(0);
 })();

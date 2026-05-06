@@ -454,21 +454,27 @@
 <!-- ========== BEWERTUNGEN ========== -->
 <section class="reviews-section" aria-labelledby="reviews-heading">
   <div class="container">
-    <div class="section-header center">
-      <span class="section-label">Was Kunden sagen</span>
-      <h2 id="reviews-heading" class="reveal">10 × 5 Sterne auf Google</h2>
-      <p class="section-sub reveal" style="max-width:520px;margin:12px auto 0;">Echte Bewertungen von echten Kunden — ungefiltert.</p>
-    </div>
+    <div class="reviews-split">
 
-    <div class="reviews-carousel-wrap">
-      <button class="rev-arrow" id="revPrev" aria-label="Vorherige Bewertung">&#8249;</button>
-      <div class="reviews-track-outer">
-        <div class="reviews-track" id="reviewsTrack"></div>
+      <!-- LINKS: Heading + Dots -->
+      <div class="reviews-left reveal">
+        <div class="reviews-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Google Bewertungen
+        </div>
+        <h2 id="reviews-heading">Was unsere<br>Kunden sagen</h2>
+        <p>Echte Bewertungen von echten Kunden — ungefiltert.</p>
+        <div class="reviews-dots" id="reviewsDots"></div>
       </div>
-      <button class="rev-arrow" id="revNext" aria-label="Nächste Bewertung">&#8250;</button>
-    </div>
 
-    <div class="reviews-dots" id="reviewsDots"></div>
+      <!-- RECHTS: animierte Karte + Pfeile -->
+      <div class="reviews-right">
+        <button class="rev-arrow" id="revPrev" aria-label="Vorherige Bewertung">&#8249;</button>
+        <div class="reviews-card-outer" id="reviewsCardOuter"></div>
+        <button class="rev-arrow" id="revNext" aria-label="Nächste Bewertung">&#8250;</button>
+      </div>
+
+    </div>
 
     <div class="reviews-cta-row">
       <a href="https://g.page/r/CQnRVqf9S0vEEAE/review" class="btn-google" target="_blank" rel="noopener noreferrer" aria-label="MS Fußbodenheizung auf Google bewerten">
