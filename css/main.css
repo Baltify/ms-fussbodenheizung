@@ -310,7 +310,7 @@ p  { font-weight: 300; color: var(--ink2); }
 }
 .hero-bg {
   position: absolute; inset: 0;
-  background: url('../img/leistung-fraesen.jpg') center/cover no-repeat;
+  background: url('../img/leistung-fraesen.webp') center/cover no-repeat;
 }
 .hero-bg::after {
   content: ''; position: absolute; inset: 0;
