@@ -1,5 +1,5 @@
 # BRIEFING — MS Fußbodenheizung Website
-> Baltify-Projekt | Stand: 2026-05-06 | Level 1 | SEO ≥ 90 % Pflicht | Letzter Commit: `354ce23`
+> Baltify-Projekt | Stand: 2026-05-06 | Level 1 | SEO ≥ 90 % Pflicht | Letzter Commit: `ca21020`
 
 ---
 
@@ -81,7 +81,7 @@ Ziel: professioneller Webauftritt für nachträgliches Fußbodenheizungs-Einfrä
 6. **CTA Split** — Text + Checkliste links, Portrait (portrait.jpg) rechts — zwischen Ablauf und Galerie. **Mobile:** großes Portrait ausgeblendet, stattdessen kleines rundes Portrait (42px, border-radius:50%) links neben der Telefonnummer-Zeile; Button + Telefonzeile stacken vertikal, beide gleich breit
 7. **Galerie** — 39 Referenzfotos, 3-spaltig. Erste 6 sichtbar, restliche 33 per „Alle 39 Referenzen anzeigen ↓"-Button einblendbar (GSAP-Stagger). Button wechselt zu „Weniger anzeigen ↑" + scrollt zurück zum Grid-Anfang
 8. **Stats** — 20.000+ m², 60+ Projekte, 1–2 Tage
-9. **Bewertungen** — Karussell, 9 Google-Reviews, Dots, Touch-Swipe
+9. **Bewertungen** — Split-Layout (links: Badge + H2 + Dots, rechts: animierte Einzelkarte). GSAP-Slide-Animation, Pill-Dots (aktiv = breite Pill rot, inaktiv = grau), Auto-Play 6 s, Touch-Swipe, 9 Reviews
 10. **Analyse-Funnel** (`#analyse`) — 5-Schritt-Formular (Name/Tel → Bundesland → Gebäude/Boden → Fläche → Heizung) — ersetzt alten roten CTA-Banner
 11. **Footer** — Logo, Nav, Kontakt, Legal, baltify-Credit
 
@@ -167,7 +167,7 @@ GA + Microsoft Clarity IDs auskommentiert — **noch nicht aktiviert** (Kunde ha
 | 2 | Google Business Profile Verifizierung abschließen | Hoch |
 | 3 | GA/Clarity IDs vom Kunden einholen + in cookie-banner.js eintragen | Mittel |
 | 4 | ueber-uns.html Inhalt prüfen/vervollständigen | Mittel |
-| 5 | Lighthouse / PageSpeed Score testen (≥ 90 Ziel) | Hoch |
+| 5 | SEO-Check nach Bild-Austausch + Reviews-Redesign: OG-Tags, Alt-Texte Galerie (39 Bilder), Lighthouse/PageSpeed ≥ 90 prüfen | **Hoch — offen** |
 | 6 | ~~Mobile CTA Split~~ | ✅ Erledigt |
 | 7 | ~~Referenzfotos vom Kunden~~ | ✅ Erledigt (39 Fotos) |
 
@@ -184,6 +184,9 @@ git push
 ```
 
 Letzte Commits (neueste oben):
+- `ca21020` — feat: Reviews-Sektion redesign — Split-Layout, GSAP-Slide, Pill-Dots
+- `6c18ce7` — fix: hero-badge Lesbarkeit — weißer Text auf dunklem Pill
+- `eb51346` — feat: Galerie Show-More Button (6 sichtbar, 33 per Klick)
 - `354ce23` — feat: alle Bilder ausgetauscht — 39 Referenzfotos, 4 neue Leistungsbilder, Hero auf leistung-fraesen
 - `3b2236c` — docs: briefing aktualisiert — mobile CTA split, service redesign, dots fix
 - `2a9ef13` — fix: mobile CTA split — kleines rundes Portrait neben Telefonnummer
