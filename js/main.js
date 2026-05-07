@@ -31,33 +31,20 @@ function initNav() {
   }
 }
 
-/* === SCROLL REVEAL === */
+/* === SCROLL REVEAL (IntersectionObserver — kein GSAP/ScrollTrigger) === */
 function initScrollReveal() {
   if (noMotion) return;
-  gsap.utils.toArray('.reveal').forEach(function (el) {
-    gsap.to(el, {
-      opacity: 1, y: 0, duration: .8, ease: 'expo.out',
-      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+  var els = document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-s');
+  if (!els.length) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
     });
-  });
-  gsap.utils.toArray('.reveal-l').forEach(function (el) {
-    gsap.to(el, {
-      opacity: 1, x: 0, duration: .9, ease: 'expo.out',
-      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
-    });
-  });
-  gsap.utils.toArray('.reveal-r').forEach(function (el) {
-    gsap.to(el, {
-      opacity: 1, x: 0, duration: .9, ease: 'expo.out',
-      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
-    });
-  });
-  gsap.utils.toArray('.reveal-s').forEach(function (el) {
-    gsap.to(el, {
-      opacity: 1, scale: 1, duration: .75, ease: 'back.out(1.4)',
-      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
-    });
-  });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  els.forEach(function (el) { io.observe(el); });
 }
 
 /* === STATS COUNT-UP === */
@@ -205,7 +192,6 @@ function initAll() {
   initRadioOptions();
   initContactForm();
   initGalleryToggle();
-  ScrollTrigger.refresh();
 }
 
 if (document.readyState === 'loading') {
