@@ -283,6 +283,10 @@
               </div>
             </div>
             <div class="form-group">
+              <label for="f-adresse">Objektadresse <span style="color:var(--muted);font-weight:400;">(optional – für ein genaues Angebot)</span></label>
+              <input type="text" id="f-adresse" placeholder="Straße, Hausnummer, PLZ, Ort" autocomplete="street-address"/>
+            </div>
+            <div class="form-group">
               <label for="f-nachricht">Nachricht / Besonderheiten <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
               <textarea id="f-nachricht" placeholder="Haben Sie besondere Anforderungen oder möchten Sie etwas mitteilen?"></textarea>
             </div>
@@ -596,6 +600,7 @@
     funnelData.flaeche   = document.getElementById('f-flaeche').value;
     funnelData.raeume    = document.getElementById('f-raeume').value;
     funnelData.stockwerk = document.getElementById('f-stockwerk').value;
+    funnelData.adresse   = document.getElementById('f-adresse').value.trim();
     funnelData.nachricht = document.getElementById('f-nachricht').value.trim();
 
     /* send via Web3Forms */
@@ -605,7 +610,7 @@
 
     var payload = {
       access_key        : '1c0fc614-77d8-49d1-b690-579847c622f9',
-      subject           : 'Neue Anfrage – MS Fußbodenheizung',
+      subject           : 'Neue Anfrage von ' + vorname + ' ' + nachname + ' – MS Fußbodenheizung',
       from_name         : 'Website Kontaktformular',
       'Name'            : vorname + ' ' + nachname,
       'E-Mail'          : email,
@@ -616,7 +621,8 @@
       'Fläche'          : funnelData.flaeche + ' m²',
       'Anzahl Räume'    : funnelData.raeume,
       'Stockwerk'       : funnelData.stockwerk,
-      'Hinweise'        : funnelData.nachricht || '–'
+      'Objektadresse'   : funnelData.adresse   || '–',
+      'Hinweise'        : funnelData.nachricht  || '–'
     };
 
     fetch('https://api.web3forms.com/submit', {
