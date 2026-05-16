@@ -316,7 +316,7 @@
         <div class="proc-num" aria-hidden="true">02</div>
         <div class="proc-content">
           <h3>Beratung &amp; Planung</h3>
-          <p>Wir kommen persönlich zu Ihnen. Wir besprechen Ihre Anforderungen, planen die Heizkreise und nennen Ihnen einen verbindlichen Festpreis — bevor auch nur eine Fräse angesetzt wird.</p>
+          <p>Wir besprechen Ihre Anforderungen persönlich — vor Ort oder anhand von Grundriss und Fotos der Baustelle. Wir planen die Heizkreise und nennen Ihnen einen verbindlichen Festpreis, bevor auch nur eine Fräse angesetzt wird.</p>
         </div>
       </div>
 
@@ -345,11 +345,11 @@
   <div class="container">
     <div class="cta-split-inner">
       <div class="cta-split-text">
-        <span class="section-label">Kostenlose Vor-Ort-Analyse</span>
-        <h2 class="reveal">Wir kommen, messen, erklären — kostenlos.</h2>
-        <p class="reveal">Wir analysieren Ihren Boden vor Ort, prüfen die Machbarkeit und nennen Ihnen einen verbindlichen Festpreis. Unverbindlich, ohne Verpflichtung.</p>
+        <span class="section-label">Kostenlose Analyse</span>
+        <h2 class="reveal">Wir analysieren, planen, nennen den Preis — kostenlos.</h2>
+        <p class="reveal">Wir prüfen die Machbarkeit Ihres Projekts und nennen Ihnen einen verbindlichen Festpreis. Bei Kunden in der Nähe kommen wir kostenlos vorbei — bei größerer Entfernung reichen uns Grundriss und Fotos der Baustelle. So oder so: unverbindlich, ohne Verpflichtung.</p>
         <ul class="cta-checklist reveal" role="list">
-          <li>Kostenlose Vor-Ort-Analyse &amp; Machbarkeitsprüfung</li>
+          <li>Kostenlose Analyse &amp; Machbarkeitsprüfung</li>
           <li>Festpreis ohne versteckte Kosten</li>
           <li>Material aus Deutschland</li>
           <li>In der Regel in 1–2 Tagen fertig</li>
@@ -491,9 +491,9 @@
 <section class="section section-alt" id="analyse" aria-labelledby="funnel-home-heading">
   <div class="container">
     <div class="section-header center">
-      <span class="section-label">Kostenlose Vor-Ort-Analyse</span>
+      <span class="section-label">Kostenlose Analyse</span>
       <h2 id="funnel-home-heading" class="reveal">In 2 Minuten zur kostenlosen Analyse</h2>
-      <p class="reveal" style="max-width:520px;margin:0 auto;">Einfach ausfüllen — wir melden uns innerhalb von 24 Stunden und vereinbaren einen kostenlosen Termin bei Ihnen vor Ort.</p>
+      <p class="reveal" style="max-width:520px;margin:0 auto;">Einfach ausfüllen — wir melden uns innerhalb von 24 Stunden. Bei Kunden in der Nähe vereinbaren wir einen kostenlosen Vor-Ort-Termin, bei größerer Entfernung reichen uns Grundriss und Fotos der Baustelle für ein verbindliches Angebot.</p>
     </div>
 
     <div style="max-width:680px;margin:0 auto;">
@@ -508,7 +508,7 @@
         <!-- ── STEP 1: Bundesland ── -->
         <div class="funnel-step active" id="fStep1">
           <h3>Wo liegt das Objekt?</h3>
-          <p class="funnel-sub">Einfach auswählen — wir kommen zu Ihnen.</p>
+          <p class="funnel-sub">Einfach auswählen — wir sind deutschlandweit für Sie da.</p>
           <div class="bl-grid">
             <button class="bl-btn" data-value="Baden-Württemberg">Baden-Württemberg</button>
             <button class="bl-btn" data-value="Bayern">Bayern</button>
@@ -575,7 +575,7 @@
         <!-- ── STEP 4: Eckdaten ── -->
         <div class="funnel-step" id="fStep4">
           <h3>Angaben zum Objekt</h3>
-          <p class="funnel-sub">Schätzen reicht — wir messen vor Ort genau nach.</p>
+          <p class="funnel-sub">Schätzen reicht — die genauen Maße klären wir mit Ihnen ab.</p>
           <div class="form-row">
             <div class="form-group">
               <label for="f-flaeche">Fläche in m²</label>
@@ -593,6 +593,16 @@
               <option>Kellergeschoss</option><option>Erdgeschoss</option>
               <option>I. Obergeschoss</option><option>II. Obergeschoss</option>
               <option>Dachgeschoss</option><option>Mehrere Etagen</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="f-verlegeabstand">Gewünschter Verlegeabstand</label>
+            <select id="f-verlegeabstand">
+              <option value="">Bitte wählen (optional)</option>
+              <option>10 cm</option>
+              <option>12,5 cm</option>
+              <option>15 cm</option>
+              <option>Weiß ich nicht</option>
             </select>
           </div>
           <div class="funnel-nav">
@@ -819,10 +829,11 @@
     if (dsWrap) dsWrap.style.outline = datenschutz ? '' : '2px solid var(--red)';
     if (!vok || !nok || !tok || !eok || !datenschutz) return;
 
-    funnelData.flaeche   = document.getElementById('f-flaeche').value;
-    funnelData.raeume    = document.getElementById('f-raeume').value;
-    funnelData.stockwerk = document.getElementById('f-stockwerk').value;
-    funnelData.nachricht = document.getElementById('f-nachricht').value.trim();
+    funnelData.flaeche        = document.getElementById('f-flaeche').value;
+    funnelData.raeume         = document.getElementById('f-raeume').value;
+    funnelData.stockwerk      = document.getElementById('f-stockwerk').value;
+    funnelData.verlegeabstand = document.getElementById('f-verlegeabstand').value;
+    funnelData.nachricht      = document.getElementById('f-nachricht').value.trim();
 
     var btn = e.target.querySelector('button[type="submit"]');
     btn.disabled = true; btn.textContent = 'Wird gesendet …';
@@ -840,10 +851,11 @@
         'Bundesland'   : funnelData.bundesland,
         'Gebäudetyp'   : funnelData.gebaeude,
         'Bodenart'     : funnelData.bodenart.join(', '),
-        'Fläche'       : funnelData.flaeche + ' m²',
-        'Anzahl Räume' : funnelData.raeume,
-        'Stockwerk'    : funnelData.stockwerk,
-        'Hinweise'     : funnelData.nachricht || '–'
+        'Fläche'         : funnelData.flaeche + ' m²',
+        'Anzahl Räume'   : funnelData.raeume,
+        'Stockwerk'      : funnelData.stockwerk,
+        'Verlegeabstand' : funnelData.verlegeabstand || '–',
+        'Hinweise'       : funnelData.nachricht || '–'
       })
     })
     .then(function(res){ return res.json(); })
