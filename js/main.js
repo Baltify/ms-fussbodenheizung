@@ -162,17 +162,27 @@ function initGalleryToggle() {
   var extras = document.querySelectorAll('.gallery-extra');
   var btnText = btn.querySelector('.gallery-btn-text');
 
+  // Reveal-Klassen von den versteckten Items entfernen — bei display:none
+  // werden sie nie vom IntersectionObserver "in-view"-markiert, ihre CSS-
+  // Transitions konkurrieren aber mit der Toggle-Animation. Sichtbarkeit
+  // wird ab hier ausschließlich durch den Toggle gesteuert.
+  extras.forEach(function (el) {
+    el.classList.remove('reveal', 'reveal-l', 'reveal-r', 'reveal-s', 'in-view');
+  });
+
   btn.addEventListener('click', function () {
     var isOpen = btn.classList.contains('open');
     if (!isOpen) {
-      extras.forEach(function (el) {
-        el.style.display = 'block';
-        // Reveal-Animation überschreiben — Elemente sichtbar machen,
-        // unabhängig vom IntersectionObserver (der greift bei display:none nicht).
-        el.classList.add('in-view');
-      });
+      extras.forEach(function (el) { el.style.display = 'block'; });
       if (!noMotion) {
-        gsap.from(extras, { opacity: 0, scale: 0.93, duration: 0.45, stagger: 0.03, ease: 'power2.out' });
+        gsap.fromTo(extras,
+          { opacity: 0, scale: 0.93 },
+          {
+            opacity: 1, scale: 1,
+            duration: 0.45, stagger: 0.03, ease: 'power2.out',
+            clearProps: 'opacity,transform'
+          }
+        );
       }
       btn.classList.add('open');
       btn.setAttribute('aria-expanded', 'true');
