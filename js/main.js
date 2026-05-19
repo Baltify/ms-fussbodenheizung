@@ -165,7 +165,12 @@ function initGalleryToggle() {
   btn.addEventListener('click', function () {
     var isOpen = btn.classList.contains('open');
     if (!isOpen) {
-      extras.forEach(function (el) { el.style.display = 'block'; });
+      extras.forEach(function (el) {
+        el.style.display = 'block';
+        // Reveal-Animation überschreiben — Elemente sichtbar machen,
+        // unabhängig vom IntersectionObserver (der greift bei display:none nicht).
+        el.classList.add('in-view');
+      });
       if (!noMotion) {
         gsap.from(extras, { opacity: 0, scale: 0.93, duration: 0.45, stagger: 0.03, ease: 'power2.out' });
       }
