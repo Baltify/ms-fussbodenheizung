@@ -244,3 +244,74 @@ if (document.readyState === 'loading') {
     '</svg>';
   document.body.appendChild(btn);
 })();
+
+/* =============================================
+   AKTIONS-COUNTDOWN (alle [data-end]-Elemente)
+   ============================================= */
+(function () {
+  var offerEls = document.querySelectorAll('[data-end]');
+  if (!offerEls.length) return;
+
+  var endTs = new Date(offerEls[0].dataset.end).getTime();
+  if (isNaN(endTs)) return;
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function syncBarHeight() {
+    var bar = document.getElementById('offerBar');
+    if (!bar) return;
+    var h = bar.hidden ? 0 : bar.offsetHeight;
+    document.documentElement.style.setProperty('--offer-bar-h', h + 'px');
+  }
+
+  function hideAll() {
+    for (var i = 0; i < offerEls.length; i++) offerEls[i].hidden = true;
+    document.body.classList.remove('has-offer-bar');
+    syncBarHeight();
+  }
+
+  function showAll() {
+    for (var i = 0; i < offerEls.length; i++) offerEls[i].hidden = false;
+    if (document.getElementById('offerBar')) {
+      document.body.classList.add('has-offer-bar');
+    }
+    // nach dem nächsten Repaint messen (Layout muss erst rendern)
+    if (window.requestAnimationFrame) {
+      requestAnimationFrame(syncBarHeight);
+    } else {
+      setTimeout(syncBarHeight, 50);
+    }
+  }
+
+  function setAll(key, val) {
+    var nodes = document.querySelectorAll('[data-cd="' + key + '"]');
+    for (var i = 0; i < nodes.length; i++) nodes[i].textContent = val;
+  }
+
+  function tick() {
+    var diff = endTs - Date.now();
+    if (diff <= 0) { hideAll(); return false; }
+
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+
+    setAll('d', pad(d));
+    setAll('h', pad(h));
+    setAll('m', pad(m));
+    setAll('s', pad(s));
+    return true;
+  }
+
+  if (!tick()) return;
+  showAll();
+  setInterval(tick, 1000);
+
+  // Bar-Höhe neu messen bei Resize / Orientation Change
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(syncBarHeight, 120);
+  });
+})();

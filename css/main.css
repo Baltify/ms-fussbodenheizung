@@ -1435,3 +1435,316 @@ p  { font-weight: 300; color: var(--ink2); }
   70%  { transform: scale(1.2); opacity: 0; }
   100% { transform: scale(1.2); opacity: 0; }
 }
+
+/* =============================================
+   AKTIONS-TOPBAR (über der Navigation)
+   ============================================= */
+:root { --offer-bar-h: 40px; }
+
+.offer-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 600;
+  min-height: var(--offer-bar-h);
+  background: linear-gradient(90deg, #B81818 0%, #CC1F1F 45%, #E63232 100%);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 500;
+  letter-spacing: .01em;
+  box-shadow: 0 1px 0 rgba(0,0,0,.15);
+  overflow: hidden;
+}
+.offer-bar[hidden] { display: none !important; }
+.offer-bar::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    115deg,
+    transparent 0, transparent 60px,
+    rgba(255,255,255,.06) 60px, rgba(255,255,255,.06) 120px
+  );
+  pointer-events: none;
+}
+.offer-bar-inner {
+  position: relative;
+  display: flex; align-items: center; gap: 14px;
+  padding: 6px 24px;
+  max-width: 100%;
+  white-space: nowrap;
+}
+.offer-bar-info {
+  display: flex; align-items: center; gap: 14px;
+}
+.offer-bar-action {
+  display: flex; align-items: center; gap: 14px;
+}
+.offer-bar-flame { font-size: 15px; animation: offerFlame 1.6s ease-in-out infinite; }
+@keyframes offerFlame {
+  0%, 100% { transform: scale(1) rotate(-3deg); }
+  50%      { transform: scale(1.15) rotate(3deg); }
+}
+.offer-bar-text strong { font-weight: 700; }
+.offer-bar-scope {
+  font-weight: 400;
+  opacity: .82;
+  font-size: 12px;
+  margin-left: 2px;
+}
+.offer-bar-divider { opacity: .5; }
+.offer-bar-cd {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.offer-bar-cd .cd-num {
+  display: inline-block; min-width: 22px; text-align: center;
+  font-weight: 700; font-size: 13px;
+  background: rgba(0,0,0,.22);
+  border-radius: 4px; padding: 2px 4px;
+  margin-left: 2px;
+}
+.offer-bar-cd .cd-unit { opacity: .75; font-size: 11px; margin-right: 4px; }
+.offer-bar-cta {
+  background: #fff; color: var(--red);
+  font-weight: 700; font-size: 12px;
+  padding: 6px 14px; border-radius: 50px;
+  transition: transform .2s, box-shadow .2s;
+  text-decoration: none;
+  margin-left: 6px;
+}
+.offer-bar-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
+}
+
+/* Nav nach unten verschieben, wenn Topbar aktiv */
+body.has-offer-bar #mainNav         { top: var(--offer-bar-h); }
+body.has-offer-bar .nav-mobile      { top: var(--offer-bar-h); }
+/* Hero-Content runter, damit Offer-Card unter Nav+Bar sitzt */
+body.has-offer-bar .hero-content    { padding-top: calc(80px + var(--offer-bar-h)); }
+
+@media(max-width: 900px){
+  :root { --offer-bar-h: 64px; }
+  .offer-bar { font-size: 12px; }
+  .offer-bar-inner {
+    flex-direction: column;
+    gap: 4px;
+    padding: 7px 12px;
+    white-space: normal;
+  }
+  .offer-bar-info {
+    gap: 8px;
+    justify-content: center;
+  }
+  .offer-bar-action {
+    gap: 10px;
+    justify-content: center;
+  }
+  .offer-bar-divider { display: none; }
+  .offer-bar-scope { display: none; }
+  .offer-bar-cd .cd-num { min-width: 20px; padding: 1px 3px; font-size: 11px; }
+  .offer-bar-cd .cd-unit { font-size: 9px; margin: 0 3px 0 1px; }
+  .offer-bar-cta { padding: 4px 14px; font-size: 11px; }
+}
+@media(max-width: 767px){
+  body.has-offer-bar .hero-content { padding-top: calc(60px + var(--offer-bar-h)); }
+}
+@media(max-width: 520px){
+  .offer-bar { font-size: 11px; line-height: 1.35; }
+  .offer-bar-flame { font-size: 13px; }
+  .offer-bar-inner { gap: 3px; padding: 6px 8px; }
+  .offer-bar-info { gap: 6px; }
+  .offer-bar-action { gap: 8px; }
+  .offer-bar-cd .cd-num { min-width: 17px; padding: 1px 3px; font-size: 10px; }
+  .offer-bar-cd .cd-unit { font-size: 8px; margin: 0 2px 0 1px; }
+  .offer-bar-cta { padding: 4px 12px; font-size: 10px; }
+}
+
+/* =============================================
+   AKTIONS-CARD im Hero
+   ============================================= */
+.offer-card {
+  display: block;
+  position: relative;
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(204,31,31,.92) 0%, rgba(184,24,24,.92) 100%);
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow:
+    0 10px 32px rgba(204,31,31,.32),
+    0 2px 0 rgba(255,255,255,.08) inset;
+  text-decoration: none; color: #fff;
+  max-width: 380px;
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.offer-card[hidden] { display: none !important; }
+.offer-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255,255,255,.22), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(0,0,0,.20), transparent 55%);
+  pointer-events: none;
+}
+.offer-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 50px rgba(204,31,31,.45),
+    0 2px 0 rgba(255,255,255,.12) inset;
+}
+.offer-card-top {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; flex-wrap: wrap;
+  margin-bottom: 10px;
+  position: relative;
+}
+.offer-card-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase;
+  background: rgba(0,0,0,.25);
+  border: 1px solid rgba(255,255,255,.2);
+  padding: 4px 9px; border-radius: 50px;
+}
+.offer-card-pulse {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 0 rgba(255,255,255,.6);
+  animation: offerPulse 1.6s ease-out infinite;
+}
+@keyframes offerPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255,255,255,.7); }
+  70%  { box-shadow: 0 0 0 9px rgba(255,255,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+.offer-card-price {
+  font-size: 14px; font-weight: 500;
+  color: rgba(255,255,255,.92);
+}
+.offer-card-price strong {
+  font-family: var(--font-d, 'Anton'), sans-serif;
+  font-size: 21px; font-weight: 400;
+  letter-spacing: .02em;
+  color: #fff;
+  display: inline-block;
+  vertical-align: -1px;
+}
+.offer-card-scope {
+  position: relative;
+  display: flex; flex-wrap: wrap; gap: 5px;
+  margin-bottom: 10px;
+}
+.offer-scope-item {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .04em;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.95);
+  padding: 3px 8px;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+.offer-card-cd {
+  position: relative;
+  display: flex; align-items: center; gap: 5px;
+  margin-bottom: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.offer-card-cd-label {
+  font-size: 10px; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  margin-right: 3px;
+}
+.cd-block {
+  display: flex; flex-direction: column; align-items: center;
+  background: rgba(0,0,0,.28);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 6px;
+  padding: 4px 6px;
+  min-width: 38px;
+}
+.cd-val {
+  font-family: var(--font-d, 'Anton'), sans-serif;
+  font-size: 17px; line-height: 1;
+  color: #fff;
+}
+.cd-lbl {
+  font-size: 8px; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+  margin-top: 3px;
+}
+.cd-sep {
+  font-family: var(--font-d, 'Anton'), sans-serif;
+  font-size: 16px; color: rgba(255,255,255,.45);
+  align-self: flex-start; padding-top: 3px;
+}
+.offer-card-cta {
+  position: relative;
+  display: inline-flex; align-items: center;
+  font-size: 11px; font-weight: 700; letter-spacing: .04em;
+  padding: 7px 14px; border-radius: 50px;
+  background: #fff; color: var(--red);
+  transition: background .25s, color .25s;
+}
+.offer-card:hover .offer-card-cta {
+  background: var(--ink);
+  color: #fff;
+}
+
+@media(max-width: 520px){
+  .offer-card { padding: 10px 13px; max-width: 100%; }
+  .offer-card-top { margin-bottom: 8px; }
+  .offer-card-price { font-size: 13px; }
+  .offer-card-price strong { font-size: 18px; }
+  .offer-scope-item { font-size: 9px; padding: 2px 7px; }
+  .cd-block { min-width: 34px; padding: 4px 5px; }
+  .cd-val { font-size: 15px; }
+  .cd-lbl { font-size: 7px; }
+  .offer-card-cta { font-size: 10px; padding: 6px 12px; }
+}
+
+/* =============================================
+   AKTIONS-REMINDER (Kontakt-Funnel)
+   ============================================= */
+.offer-reminder {
+  display: inline-flex; align-items: center; gap: 14px;
+  margin-top: 22px;
+  padding: 14px 20px 14px 16px;
+  background: rgba(255,255,255,.97);
+  border-left: 4px solid var(--red);
+  border-radius: 10px;
+  box-shadow: 0 14px 36px rgba(0,0,0,.22);
+  max-width: 100%;
+}
+.offer-reminder[hidden] { display: none !important; }
+.offer-reminder-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(204,31,31,.12); color: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.offer-reminder-title {
+  font-size: 14px; font-weight: 700; color: var(--ink);
+  margin-bottom: 2px;
+  letter-spacing: .01em;
+}
+.offer-reminder-sub {
+  font-size: 13px; color: var(--ink2, #555);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+}
+.offer-reminder-sub strong { color: var(--red); font-weight: 700; }
+.offer-reminder-cd {
+  font-weight: 600; color: var(--ink);
+  margin-left: 2px;
+  white-space: nowrap;
+}
+
+@media(max-width: 520px){
+  .offer-reminder { padding: 12px 14px; gap: 10px; }
+  .offer-reminder-icon { width: 30px; height: 30px; }
+  .offer-reminder-icon svg { width: 16px; height: 16px; }
+  .offer-reminder-title { font-size: 13px; }
+  .offer-reminder-sub { font-size: 11.5px; }
+}
