@@ -308,6 +308,8 @@ p  { font-weight: 300; color: var(--ink2); }
   position: relative; min-height: 100vh;
   display: flex; align-items: center;
   overflow: hidden;
+  /* Platz unten reservieren, damit die Hero-Buttons nicht mit der Trust-Leiste überlappen */
+  padding-bottom: 120px;
 }
 .hero-bg {
   position: absolute; inset: 0;
