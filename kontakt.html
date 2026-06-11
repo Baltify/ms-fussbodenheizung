@@ -133,9 +133,9 @@
 
         <!-- Progress -->
         <div class="funnel-progress-bar-wrap">
-          <div class="funnel-progress-fill" id="funnelFill" style="width:20%"></div>
+          <div class="funnel-progress-fill" id="funnelFill" style="width:16.67%"></div>
         </div>
-        <p class="funnel-step-indicator">Schritt <strong id="funnelNum">1</strong> von 5</p>
+        <p class="funnel-step-indicator">Schritt <strong id="funnelNum">1</strong> von 6</p>
 
         <!-- ── STEP 1: Bundesland ── -->
         <div class="funnel-step active" id="fStep1">
@@ -312,8 +312,24 @@
           </div>
         </div>
 
-        <!-- ── STEP 5: Kontaktdaten ── -->
+        <!-- ── STEP 5: Wunsch-Zeitraum ── -->
         <div class="funnel-step" id="fStep5">
+          <h3>Wann soll die Umsetzung erfolgen?</h3>
+          <p class="funnel-sub">Ein Klick — wir gehen automatisch weiter.</p>
+          <div class="bl-grid">
+            <button class="bl-btn" data-value="So schnell wie möglich">So schnell wie möglich</button>
+            <button class="bl-btn" data-value="Innerhalb von 1–3 Monaten">Innerhalb von 1–3 Monaten</button>
+            <button class="bl-btn" data-value="In 3–6 Monaten">In 3–6 Monaten</button>
+            <button class="bl-btn" data-value="Später als 6 Monate">Später als 6 Monate</button>
+            <button class="bl-btn" data-value="Noch unklar / erste Information">Noch unklar / erste Information</button>
+          </div>
+          <div class="funnel-nav">
+            <button class="funnel-back" id="fBack5">← Zurück</button>
+          </div>
+        </div>
+
+        <!-- ── STEP 6: Kontaktdaten ── -->
+        <div class="funnel-step" id="fStep6">
           <h3>Fast geschafft — wie erreichen wir Sie?</h3>
           <p class="funnel-sub">Wir melden uns innerhalb von 24 Stunden.</p>
           <form id="funnelForm" novalidate>
@@ -352,7 +368,7 @@
               </label>
             </div>
             <div class="funnel-nav">
-              <button type="button" class="funnel-back" id="fBack5">← Zurück</button>
+              <button type="button" class="funnel-back" id="fBack6">← Zurück</button>
               <button type="submit" class="funnel-next-btn">Anfrage senden →</button>
             </div>
           </form>
@@ -542,10 +558,11 @@
     bodenart   : [],
     flaeche    : '',
     raeume     : '',
-    stockwerk  : ''
+    stockwerk  : '',
+    umsetzung  : ''
   };
 
-  var TOTAL = 5;
+  var TOTAL = 6;
 
   /* ── helpers ── */
   function showStep(n) {
@@ -615,13 +632,26 @@
     showStep(5);
   });
 
+  /* ── Step 5 : Wunsch-Zeitraum (single-select, auto-advance) ── */
+  document.querySelectorAll('#fStep5 .bl-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('#fStep5 .bl-btn').forEach(function (b) {
+        b.classList.remove('selected');
+      });
+      btn.classList.add('selected');
+      funnelData.umsetzung = btn.dataset.value;
+      setTimeout(function () { showStep(6); }, 280);
+    });
+  });
+
   /* ── Back buttons ── */
   document.getElementById('fBack2').addEventListener('click', function () { showStep(1); });
   document.getElementById('fBack3').addEventListener('click', function () { showStep(2); });
   document.getElementById('fBack4').addEventListener('click', function () { showStep(3); });
   document.getElementById('fBack5').addEventListener('click', function () { showStep(4); });
+  document.getElementById('fBack6').addEventListener('click', function () { showStep(5); });
 
-  /* ── Step 5 : Form submit ── */
+  /* ── Step 6 : Form submit ── */
   document.getElementById('funnelForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -678,6 +708,7 @@
       'Anzahl Räume'    : funnelData.raeume,
       'Stockwerk'       : funnelData.stockwerk,
       'Verlegeabstand'  : funnelData.verlegeabstand || '–',
+      'Wunsch-Umsetzung': funnelData.umsetzung || '–',
       'Objektadresse'   : funnelData.adresse   || '–',
       'Hinweise'        : funnelData.nachricht  || '–'
     };
