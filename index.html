@@ -17,10 +17,8 @@
   <meta property="og:locale"      content="de_DE"/>
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" media="print" onload="this.media='all'"/>
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"/></noscript>
+  <!-- Selbst gehostete Schriften (DSGVO: keine Google-Verbindung) -->
+  <link rel="stylesheet" href="fonts/fonts.css"/>
 
   <link rel="stylesheet" href="css/main.css"/>
   <link rel="preload" as="image" href="img/leistung-fraesen.webp" type="image/webp" fetchpriority="high"/>
@@ -63,28 +61,6 @@
 </head>
 <body>
 
-<!-- ========== AKTIONS-TOPBAR ========== -->
-<div id="offerBar" class="offer-bar" data-end="2026-06-26T23:59:59" hidden>
-  <div class="offer-bar-inner">
-    <div class="offer-bar-info">
-      <span class="offer-bar-flame" aria-hidden="true">🔥</span>
-      <span class="offer-bar-text">
-        <strong>Neukunden-Aktion:</strong> Nur <strong>25&nbsp;€/m²</strong><span class="offer-bar-scope">&nbsp;inkl. Fräsen, Verlegen &amp; Verspachteln</span>
-      </span>
-    </div>
-    <span class="offer-bar-divider" aria-hidden="true">·</span>
-    <div class="offer-bar-action">
-      <span class="offer-bar-cd" aria-label="Verbleibende Zeit">
-        endet in
-        <span class="cd-num" data-cd="d">--</span><span class="cd-unit">T</span>
-        <span class="cd-num" data-cd="h">--</span><span class="cd-unit">H</span>
-        <span class="cd-num" data-cd="m">--</span><span class="cd-unit">M</span>
-        <span class="cd-num" data-cd="s">--</span><span class="cd-unit">S</span>
-      </span>
-      <a href="kontakt.html" class="offer-bar-cta">Jetzt sichern&nbsp;→</a>
-    </div>
-  </div>
-</div>
 
 <!-- ========== NAVIGATION ========== -->
 <nav id="mainNav" role="navigation" aria-label="Hauptnavigation">
@@ -118,45 +94,6 @@
   <div class="hero-bg" role="img" aria-label="Professionell eingefräste Fußbodenheizung in einem Wohnraum"></div>
   <div class="container">
     <div class="hero-content">
-      <a href="kontakt.html" id="offerCard" class="offer-card" data-end="2026-06-26T23:59:59" hidden>
-        <div class="offer-card-top">
-          <span class="offer-card-tag">
-            <span class="offer-card-pulse" aria-hidden="true"></span>
-            Nur für Neukunden
-          </span>
-          <span class="offer-card-price">
-            Nur <strong>25&nbsp;€/m²</strong>
-          </span>
-        </div>
-        <div class="offer-card-scope" aria-label="Im Preis enthalten">
-          <span class="offer-scope-item">✓ Fräsen</span>
-          <span class="offer-scope-item">✓ Verlegen</span>
-          <span class="offer-scope-item">✓ Verspachteln</span>
-        </div>
-        <div class="offer-card-cd" aria-label="Aktion endet in">
-          <span class="offer-card-cd-label">Endet&nbsp;in</span>
-          <div class="cd-block">
-            <span class="cd-val" data-cd="d">--</span>
-            <span class="cd-lbl">Tage</span>
-          </div>
-          <span class="cd-sep">:</span>
-          <div class="cd-block">
-            <span class="cd-val" data-cd="h">--</span>
-            <span class="cd-lbl">Std</span>
-          </div>
-          <span class="cd-sep">:</span>
-          <div class="cd-block">
-            <span class="cd-val" data-cd="m">--</span>
-            <span class="cd-lbl">Min</span>
-          </div>
-          <span class="cd-sep">:</span>
-          <div class="cd-block">
-            <span class="cd-val" data-cd="s">--</span>
-            <span class="cd-lbl">Sek</span>
-          </div>
-        </div>
-        <span class="offer-card-cta">Jetzt&nbsp;Termin&nbsp;sichern&nbsp;→</span>
-      </a>
       <span class="hero-badge">Fachbetrieb · deutschlandweit</span>
       <h1 class="hero-title">
         Fußbodenheizung<br>
@@ -219,7 +156,7 @@
       <!-- Left: sticky intro -->
       <div class="svc-split-left">
         <span class="section-label">Was wir machen</span>
-        <h2 id="svc-heading" class="reveal">Moderne Fußbodenheizung –<br>ohne Abriss.</h2>
+        <h2 id="svc-heading" class="reveal">Moderne Fußbodenheizung<br>ohne Abriss.</h2>
         <p class="reveal">Wir sind ein <strong>Fachbetrieb aus dem Raum Köln</strong>, deutschlandweit im Einsatz, spezialisiert auf das nachträgliche Einfräsen von Fußbodenheizungen. Wir installieren sie direkt in den bestehenden Estrich: schnell, sauber und effizient.</p>
         <p class="reveal">Dank unserer Frästechnik sind keine aufwendigen Abrissarbeiten notwendig. Keine zusätzliche Aufbauhöhe, kaum Staub und eine schnelle Umsetzung ermöglichen eine unkomplizierte Modernisierung Ihres Zuhauses.</p>
         <p class="reveal">Ob Altbau, Renovierung oder Sanierung: Wir schaffen angenehme Wärme, mehr Wohnkomfort und eine energieeffiziente Lösung für Ihr Zuhause.</p>
@@ -794,8 +731,8 @@
 </footer>
 
 <!-- ========== SCRIPTS ========== -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/reviews.js"></script>
 <script src="js/cookie-banner.js"></script>

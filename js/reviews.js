@@ -3,40 +3,64 @@
 
   var REVIEWS = [
     {
-      name: 'Jalal Jamel', initial: 'J', color: '#6B5CE7',
-      text: 'Absolut empfehlenswert! Von der ersten Beratung bis zur fertigen Verlegung lief alles professionell, zuverlässig und sauber ab. Die Arbeiten wurden pünktlich durchgeführt und das Ergebnis ist top. Besonders positiv: sehr freundlicher Kontakt, faire Preise und saubere Baustelle.'
+      name: 'Mariam Aziza', initial: 'M', color: '#C2185B',
+      text: 'Top Arbeit von MS Fußbodenheizung! Die Jungs haben auf unseren 115 qm einen mega Job gemacht, wir sind super zufrieden. Bei unseren zwei weiteren Immobilien kommt die Fußbodenheizung auf jeden Fall auch wieder von MS. Klare Empfehlung! 👍'
     },
     {
-      name: 'Tolga Bastatli', initial: 'T', color: '#009688',
-      text: 'Wir sind absolut zufrieden mit der Arbeit dieser Firma! Von der ersten Beratung bis zur finalen Umsetzung lief alles professionell, zuverlässig und transparent. Die Ausführung war termingerecht, sauber und handwerklich auf sehr hohem Niveau. Klare Weiterempfehlung!'
+      name: 'Sim. Weber', initial: 'S', color: '#00897B',
+      text: 'Wir sind absolut begeistert! Alle Absprachen und Termine wurden zuverlässig eingehalten, und auf unsere individuellen Wünsche wurde jederzeit eingegangen. Innerhalb von nur 1,5 Tagen wurden bei uns 140 qm gefräst, verlegt und sauber verspachtelt. Wir können MS Fußbodenheizung uneingeschränkt und von Herzen weiterempfehlen!'
     },
     {
-      name: 'Stefan Darmanovic', initial: 'S', color: '#E65100',
-      text: 'Super Arbeit in Rekordzeit. Alles, was versprochen wurde, wurde auch so gehalten. Seitdem haben sich auch meine Kosten halbiert genauso wie der Verbrauch. Der Inhaber ist ein Mann, der sein Wort hält.'
+      name: 'Mina Tissier', initial: 'M', color: '#6A1B9A',
+      text: 'Ein großes Dankeschön an das ganze Team! Vom ersten Gespräch bis zur Fertigstellung lief alles perfekt. Man fühlt sich gut aufgehoben und ernst genommen.'
     },
     {
-      name: 'Alusch', initial: 'A', color: '#7B3FA0',
-      text: 'Ich bin mit der Arbeit der Firma MS Fußbodenheizung äußerst zufrieden. Die Beratung war von Anfang bis Ende kompetent, freundlich und transparent. Alle Arbeiten wurden termingerecht und in sehr hoher Qualität ausgeführt. Uneingeschränkte Weiterempfehlung!'
+      name: 'Crysissnake 23', initial: 'C', color: '#1565C0',
+      text: 'Ich habe für die Renovierung meiner Wohnung ein Unternehmen für Bodenfräsarbeiten gesucht und bin hier fündig geworden. Der Kontakt war von Anfang an freundlich und unkompliziert, einen Termin habe ich innerhalb einer Woche bekommen. Die Arbeiten wurden zügig, sauber und fachgerecht ausgeführt. Super Jungs.'
+    },
+    {
+      name: 'Milano', initial: 'M', color: '#E65100',
+      text: 'Ich bin mit der Arbeit der Firma MS Fußbodenheizung äußerst zufrieden. Die Beratung war kompetent, freundlich und transparent, alle Arbeiten wurden termingerecht und in sehr hoher Qualität ausgeführt. Auch bei Rückfragen wurde stets schnell und hilfsbereit reagiert. Uneingeschränkte Weiterempfehlung!'
+    },
+    {
+      name: 'David Pazer', initial: 'D', color: '#2E7D32',
+      text: 'Gute Beratung, saubere Arbeit und nette Jungs, kann ich nur weiterempfehlen!'
+    },
+    {
+      name: 'Stefan Darmanovic', initial: 'S', color: '#5D4037',
+      text: 'Bei mir zu Hause haben sie nachträglich das Erdgeschoss gemacht. Super Arbeit in Rekordzeit. Alles, was versprochen wurde, wurde auch so gehalten. Seitdem haben sich meine Kosten halbiert, genauso wie der Verbrauch. Der Inhaber ist ein Mann, der sein Wort hält.'
+    },
+    {
+      name: 'Iryna Gutsol', initial: 'I', color: '#00838F',
+      text: 'Vielen Dank. Super Ergebnis. Sind mega mit der Arbeit der Jungs zufrieden. Sehr kultivierte und professionelle Herrschaften.'
+    },
+    {
+      name: 'Thorsten Gottschalk', initial: 'T', color: '#4527A0',
+      text: 'Ich bin absolut begeistert von MS Fußbodenheizung! Von der ersten Beratung bis zur finalen Umsetzung lief alles perfekt. Die Umsetzung verlief reibungslos, termingerecht und auf höchstem Niveau, das Ergebnis hat meine Erwartungen sogar übertroffen. Klare Weiterempfehlung für alle, die Wert auf Qualität, Service und Fachwissen legen!'
     },
     {
       name: 'Faridahmad Yousofi', initial: 'F', color: '#F4511E',
-      text: 'Von der ersten Beratung bis zur finalen Installation lief alles professionell, zuverlässig und transparent ab. Das Team war pünktlich, freundlich und hat sehr sauber gearbeitet. Auch das Preis-Leistungs-Verhältnis war fair und nachvollziehbar.'
+      text: 'Von der ersten Beratung bis zur finalen Installation lief alles professionell, zuverlässig und transparent ab. Das Team war pünktlich, freundlich und hat sehr sauber gearbeitet. Die Fußbodenheizung funktioniert einwandfrei und sorgt für angenehme Wärme im gesamten Haus. Auch das Preis-Leistungs-Verhältnis war fair und nachvollziehbar.'
     },
     {
-      name: 'Sevki Aslan', initial: 'S', color: '#5D4037',
+      name: 'Tolga Bastatli', initial: 'T', color: '#009688',
+      text: 'Wir sind absolut zufrieden mit der Arbeit dieser Firma! Das Team hat sich viel Zeit genommen, unsere Wünsche zu verstehen, und uns kompetent beraten. Die Ausführung war termingerecht, sauber und handwerklich auf sehr hohem Niveau. Wir würden die Firma jederzeit weiterempfehlen!'
+    },
+    {
+      name: 'Sevki Aslan', initial: 'S', color: '#AD1457',
       text: 'Top Qualität und perfekte Umsetzung! Die Fußbodenheizung läuft leise, effizient und sorgt für angenehme Wärme. Sehr zuverlässig, klare Empfehlung!'
     },
     {
-      name: 'Iryna Gutsol', initial: 'I', color: '#2E7D32',
-      text: 'Vielen Dank. Super Ergebnis. Sind Mega mit der Arbeit der Jungs zufrieden. Sehr kultivierte und professionelle Herrschaften.'
-    },
-    {
-      name: 'David Pazer', initial: 'D', color: '#1565C0',
-      text: 'Gute Beratung, saubere Arbeit und nette Jungs — kann ich nur weiterempfehlen!'
-    },
-    {
-      name: 'Senem Aslan', initial: 'S', color: '#00695C',
+      name: 'Senem Aslan', initial: 'S', color: '#283593',
       text: 'Perfekte Arbeit, alles läuft einwandfrei. Würde ich jederzeit wieder machen!'
+    },
+    {
+      name: 'Federico', initial: 'F', color: '#37474F',
+      text: 'Absolut empfehlenswert! Von der ersten Beratung bis zur fertigen Verlegung lief alles professionell, zuverlässig und sauber ab. Besonders positiv: sehr freundlicher Kontakt, faire Preise und saubere Baustelle. Wer eine nachträgliche Fußbodenheizung sucht, ist hier genau richtig. Klare Weiterempfehlung!'
+    },
+    {
+      name: 'Dilek Aslan', initial: 'D', color: '#7B3FA0',
+      text: 'Super Arbeit! Die Fußbodenheizung funktioniert einwandfrei, heizt schnell und gleichmäßig. Saubere und professionelle Ausführung. Absolut empfehlenswert!'
     }
   ];
 
