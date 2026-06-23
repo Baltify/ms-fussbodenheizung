@@ -1,4 +1,39 @@
+# robots.txt – MS Fußbodenheizung
+
+# Klassische Suchmaschinen: alles erlauben
 User-agent: *
+Allow: /
+
+# KI- und Answer-Engines ausdrücklich erlauben
+# (für Sichtbarkeit in ChatGPT, Perplexity, Gemini, Claude & Co.)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://www.ms-fussbodenheizung.de/sitemap.xml
